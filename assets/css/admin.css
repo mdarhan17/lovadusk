@@ -1,0 +1,316 @@
+﻿.admin-login-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #111111;
+    color: #ffffff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 28px;
+}
+
+.admin-sidebar h2 {
+    letter-spacing: 4px;
+    margin-bottom: 34px;
+    font-size: 20px;
+}
+
+.admin-sidebar a {
+    display: block;
+    padding: 13px 0;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.admin-main {
+    margin-left: 260px;
+    padding: 38px;
+}
+
+.admin-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 34px;
+}
+
+.admin-top h1 {
+    font-size: 38px;
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin-bottom: 30px;
+}
+
+.stat-card,
+.admin-panel {
+    background: #ffffff;
+    border: 1px solid #ead6dd;
+    padding: 26px;
+}
+
+.stat-card h3 {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+.stat-card p {
+    color: #777777;
+}
+
+@media (max-width: 900px) {
+    .admin-sidebar {
+        position: static;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .admin-main {
+        margin-left: 0;
+        padding: 24px;
+    }
+
+    .admin-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 14px;
+    border-bottom: 1px solid #ead6dd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.admin-table th {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #777777;
+}
+
+.table-img {
+    width: 64px;
+    height: 76px;
+    object-fit: cover;
+    background: #eeeeee;
+}
+
+.table-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.table-actions button {
+    border: 0;
+    background: transparent;
+    color: #b00020;
+    cursor: pointer;
+}
+
+.admin-form {
+    max-width: 820px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.admin-form label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ead6dd;
+    background: #ffffff;
+    font-size: 15px;
+}
+
+.admin-form textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.form-row.four {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 900px) {
+    .form-row,
+    .form-row.four {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+.status-form {
+    margin-top: 24px;
+}
+
+.status-form select {
+    max-width: 360px;
+}
+
+.payment-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.payment-detail-grid p {
+    line-height: 1.8;
+    color: #555555;
+}
+
+.admin-two-col {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.compact-stats {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 22px 0;
+}
+
+.report-filter {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.report-filter input {
+    padding: 13px;
+    border: 1px solid #ead6dd;
+    background: #ffffff;
+}
+
+@media (max-width: 1000px) {
+    .admin-two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .compact-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===============================
+   PHASE 15 - ADMIN POLISH
+================================ */
+
+.admin-sidebar {
+    box-shadow: 18px 0 45px rgba(17, 17, 17, 0.18);
+}
+
+.admin-sidebar a {
+    transition: padding-left 0.25s ease, opacity 0.25s ease, background 0.25s ease;
+    border-radius: 4px;
+}
+
+.admin-sidebar a:hover {
+    padding-left: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    opacity: 0.95;
+}
+
+.stat-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    right: -30px;
+    top: -30px;
+    border-radius: 50%;
+    background: rgba(17, 17, 17, 0.06);
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 55px rgba(17, 17, 17, 0.12);
+}
+
+.admin-panel:hover {
+    box-shadow: 0 22px 55px rgba(17, 17, 17, 0.08);
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+    border-color: #111;
+    box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.08);
+}
+
+/* PHASE 17 ADMIN COLOR POLISH */
+
+.admin-main {
+    background:
+        radial-gradient(circle at top right, rgba(201,130,155,0.18), transparent 28%),
+        linear-gradient(135deg, #FEEEF4, #FFF8FB);
+    min-height: 100vh;
+}
+
+.admin-top h1 {
+    color: #151114;
+}
+
+.admin-top p {
+    color: #7B6870;
+}
+
+.admin-form button,
+.report-filter button {
+    background: linear-gradient(135deg, #151114, #9F536D);
+}
+
+.table-actions a {
+    color: #9F536D;
+    font-weight: 700;
+}

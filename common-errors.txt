@@ -1,0 +1,32 @@
+LOVA DUSK COMMON ERROR FIXES
+
+1. Database connection failed
+- Start XAMPP Apache and MySQL.
+- Import database/lovadusk.sql in phpMyAdmin.
+- Then open run-schema.php once.
+
+2. Table/column not found
+- Open:
+  http://localhost/lovaduskProject/run-schema.php
+
+3. Admin login not working
+- Open:
+  http://localhost/lovaduskProject/admin/create-admin.php
+- Login:
+  admin@lovadusk.com
+  admin123
+
+4. Image upload not working
+- Check folder exists:
+  uploads/products
+
+5. Razorpay not opening
+- Add test key and secret in:
+  config/razorpay.php
+
+6. Cart redirects to login
+- Register/login as user first.
+
+7. Setup check
+- Open:
+  http://localhost/lovaduskProject/setup-check.php

@@ -1,0 +1,15 @@
+Options -Indexes
+
+<FilesMatch "\.(sql|log|bak|ini|env)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^(config|database|storage)/ - [F,L]
+    RewriteRule ^(includes|mail)/ - [F,L]
+
+    ErrorDocument 404 /lovaduskProject/errors/404.php
+    ErrorDocument 500 /lovaduskProject/errors/500.php
+</IfModule>
