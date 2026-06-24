@@ -1,39 +1,60 @@
 ﻿<?php
-$pageTitle = "Login | LOVA DUSK";
 require_once "../config/constants.php";
 require_once "../config/db.php";
 require_once "../includes/functions.php";
 require_once "../includes/csrf.php";
 
-$message = "";
+$pageTitle = "Login | LOVA DUSK";
+$error = "";
+
+function auth_column_exists($conn, $table, $column) {
+    $table = $conn->real_escape_string($table);
+    $column = $conn->real_escape_string($column);
+    $result = $conn->query("SHOW COLUMNS FROM `$table` LIKE '$column'");
+    return $result && $result->num_rows > 0;
+}
+
+$passwordColumn = "password";
+
+if (!auth_column_exists($conn, "users", "password") && auth_column_exists($conn, "users", "password_hash")) {
+    $passwordColumn = "password_hash";
+}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     verify_csrf();
 
-    $email = strtolower(trim($_POST["email"] ?? ""));
+    $email = trim($_POST["email"] ?? "");
     $password = $_POST["password"] ?? "";
 
     if ($email === "" || $password === "") {
-        $message = "Please enter email and password.";
+        $error = "Please enter email and password.";
     } else {
-        $stmt = $conn->prepare("SELECT id, name, email, password, role, status FROM users WHERE email = ? LIMIT 1");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $user = $stmt->get_result()->fetch_assoc();
 
-        if ($user && password_verify($password, $user["password"])) {
-            if ($user["status"] !== "active") {
-                $message = "Your account is blocked.";
-            } else {
-                session_regenerate_id(true);
-                $_SESSION["user_id"] = $user["id"];
-                $_SESSION["user_name"] = $user["name"];
-                $_SESSION["user_email"] = $user["email"];
-
-                redirect("user/dashboard.php");
-            }
+        if (!$user) {
+            $error = "Invalid email or password.";
+        } elseif (isset($user["status"]) && $user["status"] !== "active") {
+            $error = "Your account is inactive.";
+        } elseif (!password_verify($password, $user[$passwordColumn])) {
+            $error = "Invalid email or password.";
         } else {
-            $message = "Invalid email or password.";
+            session_regenerate_id(true);
+
+            $_SESSION["user_id"] = $user["id"];
+            $_SESSION["user_name"] = $user["name"] ?? "User";
+            $_SESSION["user_email"] = $user["email"];
+            $_SESSION["role"] = $user["role"] ?? "user";
+
+            if (isset($user["role"]) && $user["role"] === "admin") {
+                header("Location: " . BASE_URL . "admin/dashboard.php");
+                exit;
+            }
+
+            header("Location: " . BASE_URL . "user/dashboard.php");
+            exit;
         }
     }
 }
@@ -43,28 +64,27 @@ include "../includes/header.php";
 
 <section class="auth-section">
     <div class="auth-card">
-        <p class="eyebrow">Account Access</p>
+        <p class="eyebrow">Welcome Back</p>
         <h1>Login</h1>
 
-        <?php if ($message): ?>
-            <div class="alert"><?= clean($message); ?></div>
+        <?php if ($error): ?>
+            <div class="alert"><?= clean($error); ?></div>
         <?php endif; ?>
 
         <form method="POST" class="auth-form">
             <?= csrf_input(); ?>
 
             <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your email" required>
+            <input type="email" name="email" required placeholder="Enter your email">
 
             <label>Password</label>
-            <input type="password" name="password" placeholder="Enter your password" required>
+            <input type="password" name="password" required placeholder="Enter your password">
 
             <button type="submit" class="btn btn-dark">Login</button>
         </form>
 
-        <p class="auth-note">
-            New to LOVA DUSK?
-            <a href="<?= BASE_URL; ?>auth/register.php">Create account</a>
+        <p class="auth-link">
+            New customer? <a href="register.php">Create account</a>
         </p>
     </div>
 </section>
