@@ -1,0 +1,85 @@
+# -------------------------------
+# LOVA DUSK PHP PROJECT .gitignore
+# -------------------------------
+
+# Environment / secrets
+.env
+.env.*
+config/db-local.php
+config/db-live.php
+
+# Composer dependencies
+/vendor/
+
+# Node dependencies if added later
+/node_modules/
+
+# Logs
+*.log
+/storage/logs/*
+!/storage/logs/.gitkeep
+
+# Cache
+/storage/cache/*
+!/storage/cache/.gitkeep
+
+# Backups
+/storage/backups/*
+!/storage/backups/.gitkeep
+
+# Uploaded/generated files
+/uploads/invoices/*
+!/uploads/invoices/.gitkeep
+
+/uploads/lookbook/*
+!/uploads/lookbook/.gitkeep
+
+/uploads/instagram/*
+!/uploads/instagram/.gitkeep
+
+/uploads/products/*
+!/uploads/products/.gitkeep
+
+# Local database exports
+*.sql
+*.sqlite
+*.db
+/database/*.sql
+
+# But keep schema files if needed
+!/database/phase5-schema.php
+!/database/phase8-schema.php
+!/database/phase9-schema.php
+!/database/phase11-schema.php
+!/database/phase13-schema.php
+!/database/phase18-schema.php
+
+# Temporary setup files
+setup-check.php
+run-schema.php
+admin/create-admin.php
+admin/create-multiple-admins.php
+add-drop1-single-product.php
+remove-drop1-single-product.php
+add-drop1-product-from-assets.php
+revert-drop1-product.php
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+
+# Archive files
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+# Error files
+error_log
+php_errorlog

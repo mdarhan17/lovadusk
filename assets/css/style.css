@@ -2739,3 +2739,62 @@ select:focus {
         grid-template-columns: 1fr;
     }
 }
+
+/* Navbar Logo */
+
+.image-logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: transparent !important;
+}
+
+.image-logo-link::after {
+    display: none !important;
+}
+
+.navbar-logo-img {
+    height: 70px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.site-header {
+    min-height: 86px;
+}
+
+@media (max-width: 768px) {
+    .navbar-logo-img {
+        height: 54px;
+    }
+}
+
+/* Navbar Logo Fix */
+
+.image-logo-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    background: transparent !important;
+}
+
+.image-logo-link::after {
+    display: none !important;
+}
+
+.navbar-logo-img {
+    display: block !important;
+    height: 80px !important;
+    width: auto !important;
+    max-width: 180px !important;
+    object-fit: contain !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.site-header {
+    min-height: 95px !important;
+    overflow: visible !important;
+}

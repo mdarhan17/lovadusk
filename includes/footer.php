@@ -9,7 +9,7 @@ if (file_exists(__DIR__ . "/../database/phase18-schema.php")) {
     ensure_phase18_schema($conn);
 }
 
-$waNumber = function_exists("get_setting") ? get_setting($conn, "whatsapp_number", "919876543210") : "919876543210";
+$waNumber = function_exists("get_setting") ? get_setting($conn, "whatsapp_number", "919480530110") : "919480530110";
 $instagramLink = function_exists("get_setting") ? get_setting($conn, "instagram_link", "#") : "#";
 ?>
 <footer class="site-footer">
